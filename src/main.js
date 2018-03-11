@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap-validator/dist/validator.js'
+import 'jquery/dist/jquery.slim.min.js'
+import 'jquery/dist/jquery.min.js'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
