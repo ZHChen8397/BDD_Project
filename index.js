@@ -7,7 +7,7 @@ var Yadda = require('yadda');
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
 new Yadda.FeatureFileSearch('./test/unit/features').each(function(file) {
-    console.log(file)
+    // console.log(file)
     featureFile(file, function(feature) {
 
         var libraries = require_feature_libraries(feature);

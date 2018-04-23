@@ -10,7 +10,7 @@ module.exports = English.library()
     userinfo['email'] = email
     userinfo['pwd'] = pwd
 
-    console.log(JSON.stringify(userinfo, null, 2))
+    // console.log(JSON.stringify(userinfo, null, 2))
   })
   .when('$user click login button', function (man) {
     isLogin = user.login()
