@@ -7,7 +7,7 @@ var Yadda = require('yadda');
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
 new Yadda.FeatureFileSearch('./test/unit/features').each(function(file) {
-
+    console.log(file)
     featureFile(file, function(feature) {
 
         var libraries = require_feature_libraries(feature);
@@ -22,7 +22,7 @@ new Yadda.FeatureFileSearch('./test/unit/features').each(function(file) {
 });
 
 function require_feature_libraries(feature) {
-    console.log(`feature ${JSON.stringify(feature,null,2)}`)
+    // console.log(`feature ${JSON.stringify(feature,null,2)}`)
     return feature.annotations.step.split(', ').reduce(require_library, []);
 }
 
