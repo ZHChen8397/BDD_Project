@@ -1,4 +1,5 @@
 @step=promise
+@Pending
 Feature: promise practice
 
  Scenario: wait until add promise

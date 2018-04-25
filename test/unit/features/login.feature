@@ -1,4 +1,5 @@
-@step=login
+@step=login 
+@Pending
 Feature: login action
 
 Scenario: [User] login sucessfully

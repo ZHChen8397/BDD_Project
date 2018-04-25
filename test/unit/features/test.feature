@@ -1,4 +1,5 @@
 @step=test
+@Pending
 Feature: add
 
 Scenario: 1+2+3

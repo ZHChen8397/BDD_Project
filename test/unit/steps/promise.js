@@ -4,7 +4,7 @@ let ans = 0
 module.exports = English.library()
   .given('I have $num', function (num) {
     let p = new Promise(function(resolve,reject){
-        console.log(`ans should = ${ans}`)      
+        // console.log(`ans should = ${ans}`)      
         if(true){
             ans += num*1
             resolve(ans)
