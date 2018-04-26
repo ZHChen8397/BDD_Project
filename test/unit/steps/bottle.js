@@ -1,5 +1,5 @@
 "use strict";
-var PythonShell = require('python-shell');
+
 var Yadda = require('yadda');
 var English = Yadda.localisation.English;
 var Dictionary = Yadda.Dictionary;
@@ -14,37 +14,46 @@ module.exports = (function() {
     .given("a $NUM foot wall", function(height) {
         return new Promise(function(resolve, reject) {
             setTimeout(function() {
-                var options = {
-                    scriptPath: './pyforJS'
-                    };
-                    var pyshell = new PythonShell('cam.py',options);
-              
-                    pyshell.on('message', function (result) {
-                        console.log('innnnnnnn here')
-                        if(result) resolve(result)
-                        else reject(result)
-                    });
+                wall = new Wall();
+                resolve(true);
             }, 100);
-        })
-    })
-
-    .given("$NUM green bottles are standing on the wall", function(number_of_bottles) {
-        return new Promise(function(resolve, reject) {
-            resolve(true)
         });
     })
 
-    .when("$NUM green bottle accidentally falls", function(number_of_falling_bottles) {
+    .given("$NUM green $ITEMS are standing on the wall", function(number_of_items, item_type) {
         return new Promise(function(resolve, reject) {
-            resolve(true)
+            setTimeout(function() {
+                wall.items = number_of_items;
+                resolve(true);
+            }, 100);
         });
     })
 
-    .then("there (?:are|are still) $NUM green bottles standing on the wall", function(number_of_bottles) {
+    .when("$NUM green $ITEM accidentally falls", function(number_of_falling_items, item_type) {
         return new Promise(function(resolve, reject) {
-            assert(true)
+            setTimeout(function() {
+                wall.fall(number_of_falling_items);
+                resolve(true);
+            }, 100);
+        });
+    })
+
+    .then("there (?:are|are still) $NUM green $ITEMS standing on the wall", function(number_of_items, item_type) {
+        return new Promise(function(resolve, reject) {
+            assert.equal(number_of_items, wall.items);
+            resolve(true);
         });
     });
+
+    var Wall = function(items) {
+        this.items = items;
+        this.fall = function(n) {
+            this.items -= n;
+        };
+        this.returned = function() {
+            this.items++;
+        };
+    };
 
     return library;
 })();

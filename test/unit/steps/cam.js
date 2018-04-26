@@ -1,38 +1,48 @@
-var assert = require('assert')
+"use strict";
 var PythonShell = require('python-shell');
-var English = require('yadda').localisation.English
-let ans = 0
-let p
-let isEnter
+var Yadda = require('yadda');
+var English = Yadda.localisation.English;
+var Dictionary = Yadda.Dictionary;
+var assert = require('assert');
 
-module.exports = English.library()
-  
-  .given('I run my python code', function () {
-    // return openCam()
-    // .then((result)=>{
-    //   console.log(result)
-    // })
-  })
+module.exports = (function() {
 
-  .when('I finish the camera', function () {
-    
-  })
-  .then('I should return value gotcha', function (num) {
-    assert(true)
-  })
+    let isEnter
+    // var dictionary = new Dictionary().define('NUM', /(\d+)/);
+    var library = English.library()
 
-function openCam(){
-  return new Promise((resolve,reject)=>{
-    console.log('in funnnnn')
-    var options = {
-      scriptPath: './pyforJS'
-      };
-      var pyshell = new PythonShell('cam.py',options);
+    .given("I run my python code", function() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                var options = {
+                    scriptPath: './pyforJS'
+                    };
+                    var pyshell = new PythonShell('cam.py',options);
+              
+                    pyshell.on('message', function (result) {
+                        console.log(result)
+                        isEnter = result
+                        if(result) resolve(result)
+                        else reject(result)
+                    });
+            }, 100);
+        })
+    })
 
-      pyshell.on('message', function (result) {
-          console.log('innnnnnnn here')
-          if(result) resolve(result)
-          else reject(result)
-      });
-  })
-}
+    .when("I finish the camera", function() {
+        return new Promise(function(resolve, reject) {
+            resolve(true)
+        });
+    })
+
+    .then("I should return value gotcha", function(number_of_bottles) {
+        return new Promise(function(resolve, reject) {
+            assert.equal(1,1)
+            resolve(true)
+        });
+    });
+
+    return library;
+})();
+
+

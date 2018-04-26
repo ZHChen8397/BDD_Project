@@ -37,12 +37,14 @@ def cam():
             trainBorder=np.float32([[[0,0],[0,h-1],[w-1,h-1],[w-1,0]]])
             frameBorder=cv2.perspectiveTransform(trainBorder,H)
             cv2.polylines(frame,[np.int32(frameBorder)],True,(0,255,0),5)
+            print("match book, run test!")
+            return True
         else:
             print ("Not Enough match found- %d/%d" % (len(goodMatch),MIN_MATCH_COUNT))
         cv2.imshow('result',frame)
         k = cv2.waitKey(30) & 0xff
         if k == 27:
-            return 123
+            return True
     cam.release()
     cv2.destroyAllWindows()
 result = cam()

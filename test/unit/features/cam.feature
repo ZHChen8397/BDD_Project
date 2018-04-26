@@ -1,5 +1,4 @@
 @step=cam
-@Pending
 Feature: cam in js
 
 Scenario: JS call python script
